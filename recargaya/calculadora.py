@@ -15,6 +15,10 @@ def _calcular_bonificacion_base(monto: float) -> int:
     return 0
 
 
+def _calcular_datos_bonificados(monto: float, bonificacion: int) -> float:
+    return round(monto * bonificacion / 100, 2)
+
+
 def calcular_recarga(monto: float, premium: bool = False) -> dict:
     if monto < MONTO_MINIMO or monto > MONTO_MAXIMO:
         raise ValueError("Monto fuera del rango permitido")
@@ -24,8 +28,11 @@ def calcular_recarga(monto: float, premium: bool = False) -> dict:
     if premium and bonificacion > 0:
         bonificacion += BONO_PREMIUM
 
+    datos_bonificados = _calcular_datos_bonificados(monto, bonificacion)
+
     return {
         "monto": monto,
         "bonificacion_porcentaje": bonificacion,
+        "datos_bonificados": datos_bonificados,
         "premium": premium,
     }
