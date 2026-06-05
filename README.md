@@ -48,6 +48,9 @@ uvicorn api.main:app --reload
 ```bash
 locust -f tests/performance/locustfile.py --headless -u 30 -r 5 --run-time 60s --host http://localhost:8000
 ```
+```bash
+locust -f tests/performance/locustfile.py --host http://localhost:8000
+```
 
 ## Pipeline CI
 
