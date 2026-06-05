@@ -4,6 +4,7 @@ UMBRAL_BONO_ALTO = 30_000
 UMBRAL_BONO_BAJO = 10_000
 BONO_ALTO = 25
 BONO_BAJO = 10
+BONO_PREMIUM = 5
 
 
 def _calcular_bonificacion_base(monto: float) -> int:
@@ -20,7 +21,11 @@ def calcular_recarga(monto: float, premium: bool = False) -> dict:
 
     bonificacion = _calcular_bonificacion_base(monto)
 
+    if premium and bonificacion > 0:
+        bonificacion += BONO_PREMIUM
+
     return {
         "monto": monto,
         "bonificacion_porcentaje": bonificacion,
+        "premium": premium,
     }
